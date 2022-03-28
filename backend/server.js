@@ -23,6 +23,9 @@ const bcrypt = require("bcrypt");
 // MIDDLEWARES
 app.use(cookieParser());
 app.use(express.json());
+// app.use(() => {
+//   console.log("Requête reçue");
+// });
 
 // CONNEXION DATABASE
 mongoose
@@ -39,6 +42,7 @@ const User = require("./models/userModel");
 
 // SIGN UP
 app.post("/signup", async (req, res) => {
+  console.log("REQUETE RECUE");
   const hashedPassword = await bcrypt.hash(req.body.password, 12);
   const { email, firstName, surname, dateOfBirth } = req.body;
 
@@ -115,5 +119,5 @@ app.get("*", (_req, res) => {
 });
 
 app.listen(8000, () => {
-  console.log("LISTENING...");
+  console.log("LISTENING ON PORT 8000");
 });
