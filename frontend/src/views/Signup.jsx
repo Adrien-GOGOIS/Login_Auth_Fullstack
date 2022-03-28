@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Signup() {
   const [user, setUser] = useState({
@@ -34,15 +34,20 @@ function Signup() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:8000/signup", {
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      surname: user.surname,
-      dateOfBirth: user.dateOfBirth,
-    });
-
-    console.log("REQUETE ENVOYE");
+    axios
+      .post("http://localhost:8000/signup", {
+        email: user.email,
+        password: user.password,
+        firstName: user.firstName,
+        surname: user.surname,
+        dateOfBirth: user.dateOfBirth,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

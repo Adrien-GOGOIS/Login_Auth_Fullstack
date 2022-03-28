@@ -10,7 +10,7 @@ function Admin() {
       const data = res.data;
       setUsers(data);
     });
-  });
+  }, []);
 
   return (
     <div>
