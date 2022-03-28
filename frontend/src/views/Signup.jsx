@@ -109,7 +109,7 @@ function Signup() {
           required
           onChange={onDateChange}
         />
-        <button type="submit" onSubmit={(e) => onSubmit(e)}>
+        <button type="submit" onClick={(e) => onSubmit(e)}>
           Soumettre
         </button>
       </form>
