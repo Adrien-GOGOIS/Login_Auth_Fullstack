@@ -33,6 +33,7 @@ function Signup() {
         <input type="text" id="surname" name="surname" required />
         <label htmlFor="dateOfBirth">Entrez votre date de naissance</label>
         <input type="text" id="dateOfBirth" name="dateOfBirth" required />
+        <button type="submit">Soumettre</button>
       </form>
     </div>
   );
