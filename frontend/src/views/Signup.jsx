@@ -3,44 +3,57 @@ import axios from "axios";
 import { useState } from "react";
 
 function Signup() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    surname: "",
-    dateOfBirth: "",
-  });
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userSurname, setUserSurname] = useState("");
+  const [userDateOfBirth, setUserDateOfBirth] = useState("");
 
   const onEmailChange = (e) => {
-    setUser({ email: e.target.value });
+    e.preventDefault();
+    setUserEmail(e.target.value);
   };
 
   const onPasswordChange = (e) => {
-    setUser({ password: e.target.value });
+    e.preventDefault();
+
+    setUserPassword(e.target.value);
   };
 
   const onFirstNameChange = (e) => {
-    setUser({ firstName: e.target.value });
+    e.preventDefault();
+
+    setUserFirstName(e.target.value);
   };
 
   const onSurnameChange = (e) => {
-    setUser({ surname: e.target.value });
+    e.preventDefault();
+
+    setUserSurname(e.target.value);
   };
 
   const onDateChange = (e) => {
-    setUser({ date: e.target.value });
+    e.preventDefault();
+
+    setUserDateOfBirth(e.target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    console.log(
+      userEmail,
+      userPassword,
+      userFirstName,
+      userSurname,
+      userDateOfBirth
+    );
     axios
       .post("http://localhost:8000/signup", {
-        email: user.email,
-        password: user.password,
-        firstName: user.firstName,
-        surname: user.surname,
-        dateOfBirth: user.dateOfBirth,
+        email: userEmail,
+        password: userPassword,
+        firstName: userFirstName,
+        surname: userSurname,
+        dateOfBirth: userDateOfBirth,
       })
       .then((res) => {
         console.log(res);

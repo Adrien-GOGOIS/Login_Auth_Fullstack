@@ -23,9 +23,6 @@ const bcrypt = require("bcrypt");
 // MIDDLEWARES
 app.use(cookieParser());
 app.use(express.json());
-// app.use(() => {
-//   console.log("Requête reçue");
-// });
 
 // CONNEXION DATABASE
 mongoose
@@ -42,17 +39,17 @@ const User = require("./models/userModel");
 
 // SIGN UP
 app.post("/signup", async (req, res) => {
-  console.log("REQUETE RECUE");
+  // console.log("REQUETE RECUE");
   const hashedPassword = await bcrypt.hash(req.body.password, 12);
-  const { email, firstName, surname, dateOfBirth } = req.body;
+  console.log("HASHED", hashedPassword);
 
   try {
     await User.create({
-      email: email,
-      password: hashedPassword,
-      firstName: firstName,
-      surname: surname,
-      dateOfBirth: dateOfBirth,
+      email: req.body.email,
+      password: req.body.hashedPassword,
+      firstName: req.body.firstName,
+      surname: req.body.surname,
+      dateOfBirth: req.body.dateOfBirth,
     });
   } catch (err) {
     res.status(400).json({
