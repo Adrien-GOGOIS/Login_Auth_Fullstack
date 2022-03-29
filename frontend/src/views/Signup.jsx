@@ -1,15 +1,35 @@
 import axios from "axios";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function Signup() {
-  const [userEmail, setUserEmail] = useState("");
+  /*const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
   const [userSurname, setUserSurname] = useState("");
-  const [userDateOfBirth, setUserDateOfBirth] = useState("");
+  const [userDateOfBirth, setUserDateOfBirth] = useState("");*/
 
-  const onEmailChange = (e) => {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => {
+    console.log(data.email)
+    axios
+        .post("http://localhost:8000/signup", {
+          email: data.email,
+          password: data.password,
+          firstName: data.firstName,
+          surname: data.surname,
+          dateOfBirth: data.dateOfBirth,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  };
+
+  /*const onEmailChange = (e) => {
     e.preventDefault();
     setUserEmail(e.target.value);
   };
@@ -36,17 +56,11 @@ function Signup() {
     e.preventDefault();
 
     setUserDateOfBirth(e.target.value);
-  };
+  };*/
 
-  const onSubmit = (e) => {
+  /*const onSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      userEmail,
-      userPassword,
-      userFirstName,
-      userSurname,
-      userDateOfBirth
-    );
+    console.log();
     axios
       .post("http://localhost:8000/signup", {
         email: userEmail,
@@ -61,12 +75,32 @@ function Signup() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  };*/
 
   return (
     <div>
       <h1>SIGNUP</h1>
-      <form
+      <form onSubmit={handleSubmit(onSubmit)} style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <input {...register("email", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input {...register("password", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input {...register("confirmedPassword", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input {...register("firstName", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input {...register("surname", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input {...register("dateOfBirth", { required: true })} />
+        {errors.exampleRequired && <span>This field is required</span>}
+        <input type="submit" />
+      </form>
+      {/*<form
         style={{
           display: "flex",
           flexDirection: "column",
@@ -76,11 +110,10 @@ function Signup() {
       >
         <label htmlFor="email">Entrez votre Email</label>
         <input
+            {...register("email", { required: true, maxLength: 155})}
           type="text"
           id="email"
-          name="email"
           placeholder="Email"
-          required
           onChange={onEmailChange}
         />
         <label htmlFor="password">Entrez un mot de passe de 8 caractères</label>
@@ -125,7 +158,7 @@ function Signup() {
         <button type="submit" onClick={(e) => onSubmit(e)}>
           Soumettre
         </button>
-      </form>
+      </form>*/}
     </div>
   );
 }
