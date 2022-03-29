@@ -46,7 +46,7 @@ app.post("/signup", async (req, res) => {
   try {
     await User.create({
       email: req.body.email,
-      password: req.body.hashedPassword,
+      password: hashedPassword,
       firstName: req.body.firstName,
       surname: req.body.surname,
       dateOfBirth: req.body.dateOfBirth,
